@@ -12,15 +12,15 @@ source:
 
 build:
   noarch: python
-  number: 1
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 2
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - scipy
     - numpy
     - dill
@@ -28,6 +28,8 @@ requirements:
     - inspyred
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - pyKriging
 
